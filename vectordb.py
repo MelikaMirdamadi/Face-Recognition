@@ -30,7 +30,10 @@ class FaceVectorDB:
         if len(faces) == 0:
             return None
         # Take the first face
-        return faces[0].embedding.astype(np.float32)
+        embedding = faces[0].embedding.astype(np.float32)
+        # Normalize the embedding for cosine similarity
+        embedding = embedding / np.linalg.norm(embedding)
+        return embedding
 
     def build_index(self):
         self.index = faiss.IndexFlatIP(512)

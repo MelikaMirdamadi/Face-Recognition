@@ -93,7 +93,11 @@ Face-Recognition/
 - For production, consider adding confidence thresholds and handling edge cases.
 - FAISS index is saved to disk, so rebuilding is only needed when adding new faces.
 
-## Troubleshooting
-- **Network Error on Model Download**: Download the model manually as described in Step 3.
-- **No Faces Detected**: Check image quality and ensure faces are visible.
-- **Empty Index**: Verify dataset structure and that images are valid.
+## Demo
+To run a visual demo for presentation:
+```
+streamlit run app.py
+```
+This launches a web interface where you can:
+- Upload images for face recognition and see the matching person with similarity score.
+- View all dataset images in a grid layout.
