@@ -100,4 +100,11 @@ streamlit run app.py
 ```
 This launches a web interface where you can:
 - Upload images for face recognition and see the matching person with similarity score.
-- View all dataset images in a grid layout.
+- View all dataset images in a grid layout for easy browsing.
+
+### Demo Features
+- **Face Recognition**: Upload a query image and get instant recognition results.
+- **Dataset Grid**: Browse all stored faces organized by person.
+- **Similarity Scores**: View confidence levels for matches.
+
+Make sure `app.py` is present in the project root. If not, create a simple Streamlit app using the `FaceVectorDB` class.
