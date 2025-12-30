@@ -6,9 +6,10 @@ from insightface.app import FaceAnalysis
 import cv2
 
 class FaceVectorDB:
-    def __init__(self, index_path='database/faiss.index', dataset_path='dataset'):
+    def __init__(self, index_path='database/faiss.index', dataset_path='dataset', threshold=0.5):
         self.index_path = index_path
         self.dataset_path = dataset_path
+        self.threshold = threshold
         self.app = FaceAnalysis(name='buffalo_l')  # Use buffalo_l model
         self.app.prepare(ctx_id=0, det_size=(640, 640))  # Prepare for CPU
 
@@ -75,6 +76,10 @@ class FaceVectorDB:
         for i in range(k):
             if indices[0][i] != -1:
                 results.append((self.labels[indices[0][i]], distances[0][i]))
+        
+        # Apply threshold: if top result below threshold, mark as unknown
+        if results and results[0][1] < self.threshold:
+            return [("unknown", results[0][1])]
         return results
 
 # Usage example

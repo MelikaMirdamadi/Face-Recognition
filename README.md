@@ -15,7 +15,7 @@ This project implements a face recognition system that uses FAISS (Facebook AI S
 The current setup uses the buffalo_l model from insightface for both face detection and embedding extraction. Internally, this model employs RetinaFace for the detection step (to locate faces in images) and ArcFace for generating the 512-dimensional embeddings used in recognition.
 *****
 
-<!-- 
+
 ```
 graph TD;
     A[Project Initialization] --> B[Environment Setup];
@@ -51,7 +51,7 @@ graph TD;
     G --> Z[streamlit run app.py];
     Z --> AA[Upload images for recognition];
     AA --> BB[Browse dataset grid];
-``` -->
+```
 
 ## Project Steps
 

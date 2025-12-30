@@ -24,7 +24,11 @@ if uploaded_file is not None:
     # Perform search
     results = db.search("temp_query.jpg")
     if results:
-        st.success(f"Recognized: **{results[0][0]}** with similarity **{results[0][1]:.4f}**")
+        person, score = results[0]
+        if person == "unknown":
+            st.error(f"Unknown person detected (similarity: {score:.4f})")
+        else:
+            st.success(f"Recognized: **{person}** with similarity **{score:.4f}**")
         # Display the query image
         st.image(Image.open("temp_query.jpg"), caption="Query Image", width=200)
     else:
