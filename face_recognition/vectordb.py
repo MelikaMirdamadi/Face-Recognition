@@ -6,7 +6,7 @@ from insightface.app import FaceAnalysis
 import cv2
 
 class FaceVectorDB:
-    def __init__(self, index_path='../database/faiss.index', dataset_path='../dataset'):
+    def __init__(self, index_path='database/faiss.index', dataset_path='dataset'):
         self.index_path = index_path
         self.dataset_path = dataset_path
         self.app = FaceAnalysis(name='buffalo_l')  # Use buffalo_l model
@@ -57,12 +57,12 @@ class FaceVectorDB:
         # Save index
         faiss.write_index(self.index, self.index_path)
         # Save labels (simple way, save to a file)
-        with open('database/labels.txt', 'w') as f:
+        with open('../database/labels.txt', 'w') as f:
             for label in self.labels:
                 f.write(label + '\n')
 
     def load_labels(self):
-        if os.path.exists('database/labels.txt'):
+        if os.path.exists('../database/labels.txt'):
             with open('database/labels.txt', 'r') as f:
                 self.labels = [line.strip() for line in f]
 
