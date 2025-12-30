@@ -2,6 +2,15 @@
 
 This TODO list outlines the best datasets for testing your face recognition system with CCTV-style images. Focus on i-LIDS and CUHK for the most relevant surveillance scenarios. Complete these steps to enhance your demo.
 
+## Alternative Models for Face Embedding
+- [ ] Evaluate ***buffalo_s* model: Smaller and faster than buffalo_l, good for real-time applications, but may have slightly lower accuracy. **Best for CPU usage**.
+- [ ] Try **buffalo_m** model: Medium-sized model balancing speed and accuracy.
+- [ ] Consider **buffalo_sc** model: Uses SCRFD detector, potentially better for small faces in CCTV footage.
+- [ ] Explore **antelopev2** model: Newer model with improved performance on diverse datasets.
+- [ ] Test **dlib** or **face_recognition** library: Alternative to insightface, uses HOG + SVM or CNN models.
+- [ ] Experiment with **ArcFace** variants: If switching libraries, consider pre-trained ArcFace models for higher accuracy.
+- [ ] Enable GPU acceleration: Update code to use ctx_id=-1 for GPU if available, for faster processing.
+
 ## 1. Select Primary Dataset
 - [ ] Choose **i-LIDS** as the top priority (most CCTV-specific).
 - [ ] As backup, select **CUHK Face Dataset** for additional surveillance variations.

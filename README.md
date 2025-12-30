@@ -9,6 +9,51 @@ This project implements a face recognition system that uses FAISS (Facebook AI S
 - **Dataset Management**: Organizes face images in folders named after individuals.
 - **Scalable**: Can handle large datasets efficiently once indexed.
 
+## Project Roadmap
+
+*****
+The current setup uses the buffalo_l model from insightface for both face detection and embedding extraction. Internally, this model employs RetinaFace for the detection step (to locate faces in images) and ArcFace for generating the 512-dimensional embeddings used in recognition.
+*****
+
+
+
+```mermaid
+graph TD;
+    A[Project Initialization] --> B[Environment Setup];
+    B --> C[Prepare Dataset];
+    C --> D[Download InsightFace Model];
+    D --> E[Build Face Vector Database];
+    E --> F[Perform Face Recognition];
+    F --> G[Run Demo/App];
+    G --> H[Deployment/Usage];
+    H --> I[End];
+    
+    B --> J[Install Python 3.8+];
+    B --> K[Create Virtual Environment];
+    K --> L[Activate Venv];
+    L --> M[Install Dependencies from requirements.txt];
+    
+    C --> N[Create dataset/ folder];
+    N --> O[Organize images in subfolders by person];
+    O --> P[Ensure one clear face per image];
+    
+    D --> Q[Buffalo_L model downloads automatically];
+    Q --> R[Manual download if needed];
+    
+    E --> S[Run main.py to build FAISS index];
+    S --> T[Extract embeddings from dataset];
+    T --> U[Store in database/faiss.index];
+    U --> V[Save labels in database/labels.txt];
+    
+    F --> W[Use FaceVectorDB.search() method];
+    W --> X[Input query image];
+    X --> Y[Return person name and similarity score];
+    
+    G --> Z[streamlit run app.py];
+    Z --> AA[Upload images for recognition];
+    AA --> BB[Browse dataset grid];
+```
+
 ## Project Steps
 
 ### 1. Environment Setup
