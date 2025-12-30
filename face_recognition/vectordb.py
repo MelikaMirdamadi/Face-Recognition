@@ -6,7 +6,7 @@ from insightface.app import FaceAnalysis
 import cv2
 
 class FaceVectorDB:
-    def __init__(self, index_path='database/faiss.index', dataset_path='dataset'):
+    def __init__(self, index_path='../database/faiss.index', dataset_path='../dataset'):
         self.index_path = index_path
         self.dataset_path = dataset_path
         self.app = FaceAnalysis(name='buffalo_l')  # Use buffalo_l model
