@@ -16,8 +16,7 @@ The current setup uses the buffalo_l model from insightface for both face detect
 *****
 
 
-
-```mermaid
+```
 graph TD;
     A[Project Initialization] --> B[Environment Setup];
     B --> C[Prepare Dataset];
