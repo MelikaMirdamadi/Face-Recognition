@@ -2,6 +2,7 @@ import streamlit as st
 from vectordb import FaceVectorDB
 import os
 
+
 # Initialize the database
 @st.cache_resource
 def load_db():

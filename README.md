@@ -128,15 +128,19 @@ graph TD;
 ```python
 from vectordb import FaceVectorDB
 
-# Initialize database
-db = FaceVectorDB()
+# For FAISS (local)
+db_faiss = FaceVectorDB(db_type='faiss')
+if len(db_faiss.labels) == 0:
+    db_faiss.build_index()
 
-# Build index (if not already done)
-if len(db.labels) == 0:
-    db.build_index()
+# For Qdrant (requires Qdrant service running)
+db_qdrant = FaceVectorDB(db_type='qdrant', db_path='face_collection')
+# Build index if collection is empty
+if db_qdrant.client.count(db_qdrant.collection_name).count == 0:
+    db_qdrant.build_index()
 
-# Search for a face
-results = db.search('path/to/new_face.jpg')
+# Search for a face (works for both)
+results = db_faiss.search('path/to/new_face.jpg')  # or db_qdrant
 if results:
     print(f"Recognized: {results[0][0]} with similarity {results[0][1]}")
 else:
@@ -147,8 +151,8 @@ else:
 ```
 Face-Recognition/
 ├── main.py                 # Main script to build index and test
-├── vectordb.py             # FaceVectorDB class for embedding and search
-├── requirements.txt        # Python dependencies
+├── vectordb.py             # FaceVectorDB class for embedding and search (supports FAISS and Qdrant)
+├── requirements.txt        # Python dependencies (includes qdrant-client)
 ├── README.md               # This file
 ├── dataset/                # Face images organized by person
 │   ├── Person1/
@@ -156,10 +160,11 @@ Face-Recognition/
 │   │   └── image2.jpg
 │   └── Person2/
 │       └── image3.jpg
-└── database/               # FAISS index and labels
+└── database/               # FAISS index and labels (for FAISS mode)
     ├── faiss.index
     └── labels.txt
 ```
+Note: For Qdrant mode, data is stored in the Qdrant service (Docker volume).
 
 ## Notes
 - Ensure images have clear, front-facing faces for best results.
