@@ -1,13 +1,43 @@
-# Face Recognition with FAISS
+# Face Recognition with Vector Databases
 
 ## Project Goal
-This project implements a face recognition system that uses FAISS (Facebook AI Similarity Search) for efficient similarity search. The goal is to process a dataset of face images, extract facial embeddings (numerical representations of faces), store them in a vector database, and then identify unknown faces by finding the most similar known face in the database. Upon finding a match, the system returns the ID (name) of the recognized person along with a similarity score.
+This project implements a face recognition system that uses vector databases like FAISS or Qdrant for efficient similarity search. The goal is to process a dataset of face images, extract facial embeddings (numerical representations of faces), store them in a vector database, and then identify unknown faces by finding the most similar known face in the database. Upon finding a match, the system returns the ID (name) of the recognized person along with a similarity score.
 
 ## Key Features
 - **Face Detection and Embedding**: Uses InsightFace library with the Buffalo_L model to detect faces and extract 512-dimensional embeddings.
-- **Vector Search**: Employs FAISS for fast similarity search using cosine similarity.
+- **Vector Search**: Employs FAISS or Qdrant for fast similarity search using cosine similarity.
 - **Dataset Management**: Organizes face images in folders named after individuals.
 - **Scalable**: Can handle large datasets efficiently once indexed.
+
+## Vector Database Options
+
+This project supports two vector database options for storing and searching face embeddings:
+
+### FAISS (Local)
+- **Pros**: Fast, no external dependencies, runs locally.
+- **Cons**: Not distributed, data stored in files.
+- **Setup**: Follow the steps below; no additional setup required.
+
+### Qdrant (Docker-based)
+- **Pros**: Distributed, persistent, REST and gRPC APIs, web dashboard.
+- **Cons**: Requires Docker, more resource-intensive.
+- **Setup**:
+  1. Ensure Docker is installed and running.
+  2. Run the Qdrant container:
+     ```
+     docker run -p 6333:6333 -p 6334:6334 -v qdrant_storage:/qdrant/storage qdrant/qdrant
+     ```
+     - This starts Qdrant on ports 6333 (REST API) and 6334 (gRPC API).
+     - Data is stored in a Docker volume `qdrant_storage`.
+  3. Access the web dashboard at http://localhost:6333/dashboard.
+  4. To stop the container:
+     - Find the container ID: `docker ps`
+     - Stop it: `docker stop <container_id>`
+  5. To restart: Run the same `docker run` command again (data persists in the volume).
+  6. Working with Qdrant:
+     - Use the REST API for operations like creating collections, adding vectors, and searching.
+     - Example: Create a collection via API: `POST http://localhost:6333/collections/my_collection`
+     - Integrate in code using the Qdrant Python client: `pip install qdrant-client`
 
 ## Project Roadmap
 
