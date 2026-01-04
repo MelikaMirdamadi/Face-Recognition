@@ -8,22 +8,12 @@ def main():
         query_image = "./test.jpg"
 
     db = FaceVectorDB()
-    # Build the index if not exists
-    if db.db_type == 'faiss':
-        if len(db.labels) == 0:
-            print("Building FAISS index...")
-            db.build_index()
-            print("Index built.")
-        else:
-            print("FAISS index already exists.")
-    elif db.db_type == 'qdrant':
-        if db.client.count(db.collection_name).count == 0:
-            print("Building Qdrant collection...")
-            db.build_index()
-            print("Collection built.")
-        else:
-            print("Qdrant collection already exists.")
-
+    
+    # Always rebuild the index to include any new images in the dataset
+    print("Rebuilding index/collection...")
+    db.build_index()
+    print("Index/collection rebuilt.")
+    
     # Search for the query image
     if query_image:
         results = db.search(query_image)
